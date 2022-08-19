@@ -56,16 +56,16 @@ function getUserDetails() {
     const name = document.getElementById("name");
     const number = document.getElementById("number");
     const email = document.getElementById("email");
+    const password = document.getElementById("password");
     const userDetails = JSON.parse(localStorage.getItem("userDetails"));
-    name.addEventListener("input", function(){
-            if(name.value == userDetails.name){
-                number.value = userDetails.number;
-                email.value = userDetails.email;
-            }
-    });
-    
+
+    name.value = userDetails.name;
+    number.value = userDetails.number;
+    email.value = userDetails.email;
+    password.value = userDetails.password;
 
 }
+
 
 
 
