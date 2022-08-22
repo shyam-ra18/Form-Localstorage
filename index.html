@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Registration Form</h1>
+        <!-- <h1 id="a1">hi</h1> -->
+        <form  id="userForm" >
+            <input type="text" placeholder="Enter your name" id="name" required>
+            <input type="text" placeholder="Enter your number" id="number" maxlength="10"
+            oninput="this.value=this.value.replace(/[^0-9]/g,'')"; required>
+            <input type="email" placeholder="Enter your email address" id="email" required>
+            <input type="password" placeholder="Enter your password" id="password" required>
+
+            <button id="btn" >Next</button>
+        </form>
+    </div>
+    <script src="script.js" defer></script>
+</body>
+</html>

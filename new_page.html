@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personal Details</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="container_main">
+        <form>
+
+            <div class="wrap">
+                <input type="radio" name="gender" id="male" value="male">Male
+                <input type="radio" name="gender" id="female" value="female">Female
+            </div>
+
+            <select name="country" id="country" aria-placeholder="Select Country">
+                <option value="">Select Country</option>
+                <option value="india">India</option>
+                <option value="united kingdom">United Kingdom</option>
+                <option value="canada">Canada</option>
+                <option value="germany">Germany</option>
+            </select>
+
+            <select name="state" id="state">
+                <option value="">Select State</option>
+                <option value="gujarat">Gujarat</option>
+                <option value="england">England</option>
+                <option value="ontario">Ontario</option>
+                <option value="bavaria">Bavaria </option>
+
+            </select>
+            <select name="city" id="city">
+                <option value="">Select City</option>
+                <option value="ahmedabad">Ahmedabad</option>
+                <option value="london">London</option>
+                <option value="toronto">Toronto</option>
+                <option value="munich">Munich</option>
+            </select>
+            <button id="btn_submit" type="button">Submit</button>
+        </form>
+    </div>
+    <script>
+        const male = document.getElementById('male');
+        const female = document.getElementById('female');
+        const country = document.getElementById("country");
+        const state = document.getElementById("state");
+        const city = document.getElementById("city");
+        const submit = document.getElementById("btn_submit");
+
+        // window.onload = function () {
+        //     // country.addEventListener("keyup", disableSubmitButton);
+        //     // state.addEventListener("keyup", disableSubmitButton);
+        //     // city.addEventListener("keyup", disableSubmitButton);
+        //     // disableSubmitButton();
+
+        // }
+
+        function check_gender() {
+            if (document.getElementById('male').checked) {
+                return document.getElementById('male').value;
+            }
+            else if (document.getElementById('female').checked) {
+                return document.getElementById('female').value;
+            }
+            else {
+                alert("You have not selected any gender");
+            }
+        }
+
+        submit.addEventListener("click", (event) => {
+            addAddress();
+            event.preventDefault();
+        });
+        function addAddress() {
+            let users = JSON.parse(localStorage.getItem('users'));
+            const gender = check_gender();
+            const country1 = country.value;
+            const state1 = state.value;
+            const city1 = city.value;
+
+            const page2_data = {
+                gender,
+                country1,
+                state1,
+                city1
+            }
+            var index = window.location.search.split('?')[1];
+            let localStorageValue = localStorage.getItem("users");
+            localStorageValue = JSON.parse(localStorageValue);
+            // console.log("localStorageValue >> ", localStorageValue);
+            const newValue = localStorageValue.map((data, i) => {
+                if (i === parseInt(index)) {  //convert index(str) into number ===  
+                    return {
+                        ...data,  //data in map is an object or array form !!!
+                        ...page2_data
+                    }
+                }
+                return data;
+            })
+            localStorage.setItem("users", JSON.stringify(newValue))
+            console.log("newValue => ", newValue)
+            console.log("page2_data ==>> ", page2_data);
+
+        }
+    </script>
+</body>
+
+</html>
